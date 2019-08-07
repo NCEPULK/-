@@ -1,0 +1,30 @@
+文件夹说明：
+source_pano:源文件，包括测试集数据和训练集数据
+
+pano:图片文件，将所有测试集和训练集全景图片thumbnail提取，按场景名称命名
+
+pano_train:图片文件，将所有训练集全景图片thumbnail提取，按场景名称命名
+
+pano_test:图片文件，将所有训练集全景图片thumbnail提取，按场景名称命名
+
+results:建模结果文件，将所有pano内的图片按场景建模，结果以点云形式保存在各个场景文件夹中,内附output.csv及不同场景命名csv文件，为仿射变换计算输出结果
+
+results_train:建模结果文件，将所有pano——train内的图片按场景建模，结果以点云形式保存在各个场景文件夹中,内附output.csv及不同场景命名csv文件，为仿射变换计算输出结果
+
+results_test:建模结果文件，将所有pano_test内的图片按场景建模，结果以点云形式保存在各个场景文件夹中,内附output.csv及不同场景命名csv文件，为仿射变换计算输出结果,最终上传结果及为该文件夹内output.csv输出
+
+文件说明：
+move.sh:source_pano向pano,pano_test,pano_train的图片传递脚本，包含move.py,move_test.py等文件
+reconstruct.sh:调用open_MVG进行场景建模脚本，需配置open_MVG
+reconstruct_test.sh:调用open_MVG进行场景建模脚本，需配置open_MVG,精度较reconstruct.sh高，针对测试集和训练集建模
+reconstruct_train.sh:调用open_MVG进行场景建模脚本，需配置open_MVG,精度较reconstruct.sh高，针对所有图片建模
+
+
+结果输出程序:getPose.py
+1.根据训练集合成点云坐标值和给定真实坐标值计算仿射变换矩阵
+2.计算训练集仿射结果与真实坐标值平均欧式距离
+3.根据测试集合成点云与得到的仿射变换矩阵计算测试集预测坐标值
+4.所有的数据集pano*的仿射结果都存在对应results*文件夹下.csv文件中
+
+配置环境: ubuntu 16.04  python3.5 
+	open_MVG开源三维重建项目　https://github.com/openMVG/openMVG/blob/master/BUILD.md
